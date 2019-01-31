@@ -15,6 +15,11 @@
         <item name="actionBarStyle">@style/AppTheme.Toolbar</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/background</item>
+
+    </style>
+
 
     <style name="TextAppearance.AppTheme.HeroGuide" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">16sp</item>
