@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.diegocunha.marvelheroguide.view.comic.ComicItemViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:paddingBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/comicImage"
+                imageUri="@{viewModel.image}"
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+
+            <TextView
+                style="@style/TextAppearance.AppTheme.CardText.Title"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@{viewModel.title}"
+                tools:text="Avengers 1" />
+
+
+            <TextView
+                style="@style/TextAppearance.AppTheme.CardText"
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="3"
+                tools:text="Lorem"
+                android:text="@{viewModel.description}"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

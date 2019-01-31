@@ -15,6 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            visibleOrGone="@{!viewModel.isLoading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,6 +32,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
 
                 <ImageView
                     android:id="@+id/characterImage"
@@ -63,6 +72,44 @@
                     app:layout_constraintTop_toBottomOf="@+id/descriptionTitle"
                     tools:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" />
 
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="48dp"
+                    android:text="@string/comics_title"
+                    android:textAppearance="@style/TextAppearance.AppTheme.HeroGuide.Title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/comicsRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15"
+                    tools:listitem="@layout/comic_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
