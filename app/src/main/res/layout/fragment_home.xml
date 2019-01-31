@@ -9,8 +9,7 @@
             type="com.diegocunha.marvelheroguide.view.home.HomeViewModel"/>
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -24,5 +23,11 @@
             android:paddingBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/character_item" />
-    </LinearLayout>
+
+        <ProgressBar
+            visibleOrGone="@{viewModel.isLoading}"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 </layout>

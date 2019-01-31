@@ -21,6 +21,9 @@ class HomeViewModel(private val repository: MarvelRepository) : ViewModel() {
     private val _heroes = MutableLiveData<List<Character>>()
     val heroes: LiveData<List<Character>> = _heroes
 
+    private val _error = MutableLiveData<Boolean>()
+    val error: LiveData<Boolean> = _error
+
     init {
         loadHeroes()
     }
@@ -28,10 +31,12 @@ class HomeViewModel(private val repository: MarvelRepository) : ViewModel() {
     fun loadHeroes() {
         repository.getHeroes(LIMIT, OFFSET)
                 .map { it.data.characters }
+                .doOnError { _error.postValue(true) }
                 .doOnSuccess { _heroes.postValue(it) }
                 .doOnSubscribe { _isLoading.postValue(true) }
                 .doAfterTerminate {
                     OFFSET += LIMIT
+                    _isLoading.postValue(false)
                 }.asLiveData()
 
     }

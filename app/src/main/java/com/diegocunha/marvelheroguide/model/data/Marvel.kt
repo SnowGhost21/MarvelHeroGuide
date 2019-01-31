@@ -16,39 +16,39 @@ data class Data(
 
 data class Character(
         val id: Int?, val name: String?, val description: String?,
-        val modified: Date?, val resourceUri: String?, val urls: Array<Url>?,
-        val thumbnail: Image?, val comics: ComicList?, val stories: StoryList?,
-        val events: EventList?, val series: SeriesList?
+        val modified: Date?, val resourceUri: String?, val urls: List<Url>?,
+        val thumbnail: Image?, val comics: Comic?, val stories: Story?,
+        val events: Event?, val series: Serie?
 )
 
 class Image(val path: String, val extension: String)
 
 class Url(val type: String?, val url: String?)
 
-class ComicList(
+class Comic(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        val items: Array<ComicSummary>?
+        val items: List<ComicSummary>?
 )
 
 class ComicSummary(val resourceURI: String?, val name: String?)
 
-class StoryList(
+class Story(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        val items: Array<StorySummary>?
+        val items: List<StorySummary>?
 )
 
 class StorySummary(val resourceURI: String?, val name: String?, val type: String?)
 
-class EventList(
+class Event(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        val items: Array<EventSummary>?
+        val items: List<EventSummary>?
 )
 
 class EventSummary(val resourceURI: String?, val name: String?)
 
-class SeriesList(
+class Serie(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        val items: Array<SeriesSummary>?
+        val items: List<SeriesSummary>?
 )
 
 class SeriesSummary(val resourceURI: String?, val name: String?)

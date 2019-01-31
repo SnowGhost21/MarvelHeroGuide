@@ -1,6 +1,7 @@
 package com.diegocunha.marvelheroguide.view.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,12 @@ class HomeFragment : Fragment() {
         viewModel.loadHeroes()
         viewModel.heroes.observe(this, Observer {
             it?.let { characters -> adapter.setItems(characters) }
+        })
+
+        viewModel.error.observe(this, Observer {
+            it?.let {
+                Log.e("Error", "Error request")
+            }
         })
 
 

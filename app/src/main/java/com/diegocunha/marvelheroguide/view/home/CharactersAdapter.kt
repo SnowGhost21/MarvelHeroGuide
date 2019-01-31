@@ -9,14 +9,16 @@ import com.diegocunha.marvelheroguide.view.databinding.ReactiveAdapter
 
 class CharactersAdapter : ReactiveAdapter<Character, CharacterItemBinding>() {
 
+    private lateinit var context: Context
+
     override fun getBinding(context: Context, parent: ViewGroup, viewType: Int): CharacterItemBinding {
+        this.context = context
         return CharacterItemBinding.inflate(LayoutInflater.from(parent.context),
                 parent, false)
     }
 
     override fun bind(binding: CharacterItemBinding, item: Character) {
-        val viewModel = CharacterListItemViewModel(item)
+        val viewModel = CharacterListItemViewModel(item, context)
         binding.viewModel = viewModel
-
     }
 }

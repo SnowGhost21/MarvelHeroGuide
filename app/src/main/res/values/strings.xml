@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MarvelHeroGuide</string>
+    <string name="description_not_available">Description not available</string>
 </resources>
