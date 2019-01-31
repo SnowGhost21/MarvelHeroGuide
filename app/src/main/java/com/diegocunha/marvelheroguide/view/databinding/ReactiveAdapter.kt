@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class ReactiveAdapter<T, R : ViewDataBinding> : RecyclerView.Adapter<ReactiveAdapter<T, R>.ViewHolder>() {
 
-    private var items: List<T> = emptyList()
+    private var items: ArrayList<T> = ArrayList<T>()
 
     fun setItems(newItems: List<T>) {
-        val diffResult = calculateDiff(items, newItems)
-        items = newItems
-        diffResult.dispatchUpdatesTo(this)
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,8 +35,6 @@ abstract class ReactiveAdapter<T, R : ViewDataBinding> : RecyclerView.Adapter<Re
     }
 
     abstract fun bind(binding: R, item: T)
-
-    abstract fun calculateDiff(oldList: List<T>, newList: List<T>): DiffUtil.DiffResult
 
     inner class ViewHolder(binding: R) : BindingViewHolder<R>(binding)
 }

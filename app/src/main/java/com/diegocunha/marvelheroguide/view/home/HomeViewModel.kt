@@ -9,12 +9,32 @@ import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
 import io.reactivex.disposables.Disposable
 
 class HomeViewModel(private val repository: MarvelRepository) : ViewModel() {
+
+    companion object {
+        private var LIMIT = 20
+        private var OFFSET = 0
+    }
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val heroes: LiveData<List<Character>> = repository.getHeroes(20, 0)
-            .map { it.data.characters }
-            .asLiveData()
+    private val _heroes = MutableLiveData<List<Character>>()
+    val heroes: LiveData<List<Character>> = _heroes
+
+    init {
+        loadHeroes()
+    }
+
+    fun loadHeroes() {
+        repository.getHeroes(LIMIT, OFFSET)
+                .map { it.data.characters }
+                .doOnSuccess { _heroes.postValue(it) }
+                .doOnSubscribe { _isLoading.postValue(true) }
+                .doAfterTerminate {
+                    OFFSET += LIMIT
+                }.asLiveData()
+
+    }
 
 
     private var requestHeroes: Disposable? = null

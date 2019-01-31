@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.diegocunha.marvelheroguide.databinding.FragmentHomeBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -18,17 +20,38 @@ class HomeFragment: Fragment() {
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 
+
         val adapter = CharactersAdapter()
         binding.heroesRecyclerView.adapter = adapter
         binding.heroesRecyclerView.addItemDecoration(ListItemDecoration())
-
-//        viewModel.requestHeroes(20, 0)
-
-
+        viewModel.loadHeroes()
         viewModel.heroes.observe(this, Observer {
-           it?.let { characters -> adapter.setItems(characters) }
+            it?.let { characters -> adapter.setItems(characters) }
         })
 
+
+        binding.heroesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val manager = recyclerView.layoutManager as? LinearLayoutManager
+                manager?.let {
+                    val visibleItemCount = it.childCount
+                    val totalItemCount = it.itemCount
+
+                    val firstVisibleItemPosition = it.findFirstVisibleItemPosition()
+
+                    if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
+                        viewModel.loadHeroes()
+                    }
+                }
+            }
+
+        })
 
 
         return binding.root
