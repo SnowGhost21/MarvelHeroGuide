@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#ED1D24</color>
+    <color name="colorPrimaryDark">#D51A20</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="secondaryColor">#D73136</color>
     <color name="cardBackgroundColor">#FFFFFF</color>
     <color name="cardSubtitleColor">#7f8382</color>
     <color name="titleTextColor">#3e3e3e</color>
     <color name="secondaryTextColor">#767676</color>
+    <color name="toolbarTitleColor">#FFFFFF</color>
 </resources>

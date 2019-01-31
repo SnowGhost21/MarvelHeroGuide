@@ -3,9 +3,11 @@ package com.diegocunha.marvelheroguide.model.repository.retrofit
 import com.diegocunha.marvelheroguide.BuildConfig
 import com.diegocunha.marvelheroguide.extensions.md5
 import com.diegocunha.marvelheroguide.model.data.Response
+import com.diegocunha.marvelheroguide.model.data.ResponseComic
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
 import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.rxkotlin.zipWith
 import java.util.*
 
 class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
@@ -24,6 +26,16 @@ class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
         parameters["orderBy"] = "name"
 
         return api.getHeroes(parameters)
+    }
+
+    override fun getHeroById(id: Int): Single<Response> {
+        val parameters = createDefaultParameters()
+        return api.getHeroById(id, parameters)
+    }
+
+    override fun getComicsByHeroId(id: Int): Single<ResponseComic> {
+        val parameters = createDefaultParameters()
+        return api.getComicsByHeroId(id, parameters)
     }
 
     private fun createDefaultParameters(): LinkedHashMap<String, String> {

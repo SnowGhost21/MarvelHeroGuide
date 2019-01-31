@@ -7,6 +7,14 @@ data class Response(
         val data: Data
 )
 
+data class ResponseComic(
+        val data: DataComic
+)
+
+data class DataComic(
+    @SerializedName("results") val comics: List<ComicSummary>
+)
+
 data class Data(
         val offset: Int,
         val limit: Int,
@@ -15,7 +23,7 @@ data class Data(
 )
 
 data class Character(
-        val id: Int?, val name: String?, val description: String?,
+        val id: Int, val name: String, val description: String?,
         val modified: Date?, val resourceUri: String?, val urls: List<Url>?,
         val thumbnail: Image?, val comics: Comic?, val stories: Story?,
         val events: Event?, val series: Serie?
@@ -27,10 +35,16 @@ class Url(val type: String?, val url: String?)
 
 class Comic(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        val items: List<ComicSummary>?
+        var items: List<ComicSummary>?
 )
 
-class ComicSummary(val resourceURI: String?, val name: String?)
+class ComicSummary(val id: Int,
+                   val digitalId: Int,
+                   val title: String,
+                   val description: String?,
+                   val thumbnail: Image?,
+                   val resourceURI: String?,
+                   val name: String?)
 
 class Story(
         val available: Int?, val returned: Int?, val collectionURI: String?,

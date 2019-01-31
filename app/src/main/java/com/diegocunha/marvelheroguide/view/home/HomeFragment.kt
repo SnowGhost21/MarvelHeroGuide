@@ -5,11 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.diegocunha.marvelheroguide.R
 import com.diegocunha.marvelheroguide.databinding.FragmentHomeBinding
+import com.diegocunha.marvelheroguide.view.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -21,11 +27,22 @@ class HomeFragment : Fragment() {
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 
+        (activity as MainActivity).supportActionBar?.apply {
+            title = getString(R.string.home_title)
+            setDisplayHomeAsUpEnabled(false)
+        }
+
 
         val adapter = CharactersAdapter()
+        adapter.detailHero.observe(this, Observer {
+            openCharacterDetailFragment(it)
+        })
+
+
         binding.heroesRecyclerView.adapter = adapter
         binding.heroesRecyclerView.addItemDecoration(ListItemDecoration())
-        viewModel.loadHeroes()
+
+
         viewModel.heroes.observe(this, Observer {
             it?.let { characters -> adapter.setItems(characters) }
         })
@@ -62,5 +79,21 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+
+
+    private fun openCharacterDetailFragment(params: CharacterNavigationParams) {
+        val characterId = params.id
+        val characterName = params.name
+        val action = HomeFragmentDirections.actionHomeFragmentToCharacterDetailFragment(characterId, characterName)
+
+
+        val extras = FragmentNavigator.Extras.Builder().apply {
+            params.sharedViews.forEach {
+                addSharedElement(it, ViewCompat.getTransitionName(it) ?: "")
+            }
+        }.build()
+
+        findNavController().navigate(action, extras)
     }
 }
