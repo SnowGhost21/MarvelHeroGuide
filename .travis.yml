@@ -29,11 +29,11 @@ android:
 
 before_install:
   - sudo chmod +x gradlew
-  - pip install --user codecov    #Install codecov
+  - chmod +x gradle/wrapper/gradle-wrapper.jar
 
 
 script:
-  - ./gradlew test --info
+  - ./gradlew test build --info
 
 after_success:
   - codecov
