@@ -11,8 +11,15 @@ data class ResponseComic(
         val data: DataComic
 )
 
+data class ResponseCreator(
+        val data: DataCreator
+)
+
+data class DataCreator(
+        @SerializedName("results")val creators: List<CreatorSummary>)
+
 data class DataComic(
-    @SerializedName("results") val comics: List<ComicSummary>
+        @SerializedName("results") val comics: List<ComicSummary>
 )
 
 data class Data(
@@ -29,40 +36,47 @@ data class Character(
         val events: Event?, val series: Serie?
 )
 
-class Image(val path: String, val extension: String)
+data class Image(val path: String, val extension: String)
 
-class Url(val type: String?, val url: String?)
+data class Url(val type: String?, val url: String?)
 
-class Comic(
+data class Comic(
         val available: Int?, val returned: Int?, val collectionURI: String?,
         var items: List<ComicSummary>?
 )
 
-class ComicSummary(val id: Int,
-                   val digitalId: Int,
-                   val title: String,
-                   val description: String?,
-                   val thumbnail: Image?,
-                   val resourceURI: String?,
-                   val name: String?)
+data class ComicSummary(val id: Int,
+                        val digitalId: Int,
+                        val title: String,
+                        val description: String?,
+                        val thumbnail: Image?,
+                        val resourceURI: String?,
+                        val name: String?,
+                        val creators: Creator)
 
-class Story(
+data class Story(
         val available: Int?, val returned: Int?, val collectionURI: String?,
         val items: List<StorySummary>?
 )
 
-class StorySummary(val resourceURI: String?, val name: String?, val type: String?)
+data class StorySummary(val resourceURI: String?, val name: String?, val type: String?)
 
-class Event(
+data class Event(
         val available: Int?, val returned: Int?, val collectionURI: String?,
         val items: List<EventSummary>?
 )
 
-class EventSummary(val resourceURI: String?, val name: String?)
+data class EventSummary(val resourceURI: String?, val name: String?)
 
-class Serie(
+data class Serie(
         val available: Int?, val returned: Int?, val collectionURI: String?,
         val items: List<SeriesSummary>?
 )
 
-class SeriesSummary(val resourceURI: String?, val name: String?)
+data class SeriesSummary(val resourceURI: String?, val name: String?)
+
+data class Creator(@SerializedName("items") var creators: List<CreatorSummary>?)
+
+data class CreatorSummary(val id: Int,
+                          val fullName: String,
+                          val thumbnail: Image?)

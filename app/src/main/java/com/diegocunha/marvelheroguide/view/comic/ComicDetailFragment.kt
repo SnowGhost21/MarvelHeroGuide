@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +12,7 @@ import androidx.transition.TransitionInflater
 import com.diegocunha.marvelheroguide.R
 import com.diegocunha.marvelheroguide.databinding.FragmentComicDetailBinding
 import com.diegocunha.marvelheroguide.view.MainActivity
+import com.diegocunha.marvelheroguide.view.creator.CreatorAdapter
 import org.koin.android.ext.android.inject
 
 class ComicDetailFragment : Fragment() {
@@ -45,6 +47,16 @@ class ComicDetailFragment : Fragment() {
 
         viewModel.description.observe(this, Observer {
             binding.description.text = if (!it.isNullOrEmpty()) it else getString(R.string.description_not_available)
+        })
+
+        ViewCompat.setTransitionName(binding.coordinator, comicId.toString())
+        ViewCompat.setTransitionName(binding.comicImage, "image_$comicId")
+
+        val adapter = CreatorAdapter()
+        binding.creatorRecyclerView.adapter = adapter
+
+        viewModel.creators.observe(this, Observer {
+            it?.let { creators -> adapter.setItems(creators) }
         })
 
         return binding.root

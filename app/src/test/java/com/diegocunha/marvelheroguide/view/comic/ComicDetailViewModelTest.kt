@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.diegocunha.marvelheroguide.assertLiveDataEquals
 import com.diegocunha.marvelheroguide.model.fixture.createListComicSummary
 import com.diegocunha.marvelheroguide.model.fixture.createResponseComic
+import com.diegocunha.marvelheroguide.model.fixture.createResponseCreator
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
@@ -27,12 +28,20 @@ class ComicDetailViewModelTest {
     @Before
     fun setup() {
         whenever(marvelRepository.getComicById(any())).thenReturn(Single.just(createResponseComic))
+        whenever(marvelRepository.getCreatorsByComicId(any())).thenReturn(Single.just(createResponseCreator))
     }
 
     @Test
     fun shouldGetComicDetail() {
         val viewModel = ComicDetailViewModel(marvelRepository, 1234)
         assertLiveDataEquals(createListComicSummary.first(), viewModel.comic)
+    }
+
+    @Test
+    fun shouldGetListOfCreators() {
+        val viewModel = ComicDetailViewModel(marvelRepository, 1234)
+        val creators = createResponseCreator.data.creators
+        assertLiveDataEquals(creators, viewModel.creators)
     }
 
     @Test

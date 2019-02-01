@@ -4,10 +4,9 @@ import com.diegocunha.marvelheroguide.BuildConfig
 import com.diegocunha.marvelheroguide.extensions.md5
 import com.diegocunha.marvelheroguide.model.data.Response
 import com.diegocunha.marvelheroguide.model.data.ResponseComic
+import com.diegocunha.marvelheroguide.model.data.ResponseCreator
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
-import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.rxkotlin.zipWith
 import java.util.*
 
 class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
@@ -41,6 +40,11 @@ class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
     override fun getComicById(id: Int): Single<ResponseComic> {
         val parameters = createDefaultParameters()
         return api.getComicById(id, parameters)
+    }
+
+    override fun getCreatorsByComicId(id: Int): Single<ResponseCreator> {
+        val parameters = createDefaultParameters()
+        return api.getCreatorsByComicId(id, parameters)
     }
 
     private fun createDefaultParameters(): LinkedHashMap<String, String> {

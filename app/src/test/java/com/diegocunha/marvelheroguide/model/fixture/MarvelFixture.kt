@@ -10,7 +10,26 @@ val createListUrl = listOf(createUrl)
 
 val createImage = Image("path", ".png")
 
-val createComicSummary = ComicSummary(0, 0, "title", "description", createImage, "resourceId", "name")
+val createCreatorSummary = CreatorSummary(0, "fullName", createImage)
+
+val createListOfCreators = listOf(createCreatorSummary)
+
+val createCreator = Creator(createListOfCreators)
+
+val createComicSummary = ComicSummary(
+        0,
+        0,
+        "title",
+        "description",
+        createImage,
+        "resourceId",
+        "name",
+        createCreator
+)
+
+val createDataCreator = DataCreator(createListOfCreators)
+
+val createResponseCreator = ResponseCreator(createDataCreator)
 
 val createListComicSummary = listOf(createComicSummary)
 

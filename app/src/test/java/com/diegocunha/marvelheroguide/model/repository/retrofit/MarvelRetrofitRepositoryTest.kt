@@ -2,6 +2,7 @@ package com.diegocunha.marvelheroguide.model.repository.retrofit
 
 import com.diegocunha.marvelheroguide.model.fixture.createResponse
 import com.diegocunha.marvelheroguide.model.fixture.createResponseComic
+import com.diegocunha.marvelheroguide.model.fixture.createResponseCreator
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
@@ -23,6 +24,7 @@ class MarvelRetrofitRepositoryTest {
         whenever(api.getHeroById(any(), any())).thenReturn(Single.just(createResponse))
         whenever(api.getComicsByHeroId(any(), any())).thenReturn(Single.just(createResponseComic))
         whenever(api.getComicById(any(), any())).thenReturn(Single.just(createResponseComic))
+        whenever(api.getCreatorsByComicId(any(), any())).thenReturn(Single.just(createResponseCreator))
     }
 
     @Test
@@ -51,6 +53,13 @@ class MarvelRetrofitRepositoryTest {
         val repository = MarvelRetrofitRepository(api)
         repository.getComicById(1234)
         verify(api).getComicById(any(), any())
+    }
+
+    @Test
+    fun shouldGetListCreatorsByComicIdFromApi() {
+        val repository = MarvelRetrofitRepository(api)
+        repository.getCreatorsByComicId(1234)
+        verify(api).getCreatorsByComicId(any(), any())
     }
 
 }
