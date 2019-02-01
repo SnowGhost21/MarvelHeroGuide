@@ -2,6 +2,7 @@ package com.diegocunha.marvelheroguide.view.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.diegocunha.marvelheroguide.assertLiveDataEquals
+import com.diegocunha.marvelheroguide.assertLiveDataNull
 import com.diegocunha.marvelheroguide.model.fixture.createListCharacter
 import com.diegocunha.marvelheroguide.model.fixture.createResponse
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
@@ -33,5 +34,11 @@ class HomeViewModelTest {
     fun shouldGetListOfCharacters() {
         val viewModel = HomeViewModel(marvelRepository)
         assertLiveDataEquals(createListCharacter, viewModel.heroes)
+    }
+
+    @Test
+    fun shouldNotThrowError() {
+        val viewModel = HomeViewModel(marvelRepository)
+        assertLiveDataNull(viewModel.error)
     }
 }

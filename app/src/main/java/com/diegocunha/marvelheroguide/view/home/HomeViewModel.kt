@@ -40,9 +40,4 @@ class HomeViewModel(private val repository: MarvelRepository) : ViewModel() {
                 }.asLiveData()
 
     }
-
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

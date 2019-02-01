@@ -2,10 +2,7 @@ package com.diegocunha.marvelheroguide.view.character
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.diegocunha.marvelheroguide.assertLiveDataEquals
-import com.diegocunha.marvelheroguide.model.fixture.createImage
-import com.diegocunha.marvelheroguide.model.fixture.createListCharacter
-import com.diegocunha.marvelheroguide.model.fixture.createResponse
-import com.diegocunha.marvelheroguide.model.fixture.createResponseComic
+import com.diegocunha.marvelheroguide.model.fixture.*
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
@@ -42,5 +39,17 @@ class CharacterDetailViewModelTest {
     fun shouldGetHeroImage() {
         val viewModel = CharacterDetailViewModel(marvelRepository, 123)
         assertLiveDataEquals(createImage, viewModel.imageUrl)
+    }
+
+    @Test
+    fun shouldGetComics() {
+        val viewModel = CharacterDetailViewModel(marvelRepository, 123)
+        assertLiveDataEquals(createCharacter.comics?.items, viewModel.comics)
+    }
+
+    @Test
+    fun shouldGetDescription() {
+        val viewModel = CharacterDetailViewModel(marvelRepository, 123)
+        assertLiveDataEquals(createCharacter.description, viewModel.description)
     }
 }

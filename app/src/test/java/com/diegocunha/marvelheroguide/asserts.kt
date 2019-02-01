@@ -12,3 +12,10 @@ fun <T> assertLiveDataEquals(expected: T?, liveData: LiveData<T>, doAfterSubscri
     doAfterSubscribe?.invoke()
     Assert.assertEquals(expected, value)
 }
+
+fun <T> assertLiveDataNull(liveData: LiveData<T>, doAfterSubscribe: (() -> Unit)? = null) {
+    var value: T? = null
+    liveData.observeForever { value = it }
+    doAfterSubscribe?.invoke()
+    Assert.assertEquals(null, value)
+}
