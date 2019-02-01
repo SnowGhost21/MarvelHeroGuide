@@ -33,4 +33,4 @@ before_install:
 
 
 script:
-  - ./gradlew test build --info
+  - ./gradlew test build
