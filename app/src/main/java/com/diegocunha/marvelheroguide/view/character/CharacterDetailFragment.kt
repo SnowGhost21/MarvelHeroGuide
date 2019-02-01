@@ -8,10 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import com.diegocunha.marvelheroguide.R
 import com.diegocunha.marvelheroguide.databinding.FragmentCharacterDetailBinding
 import com.diegocunha.marvelheroguide.view.MainActivity
+import com.diegocunha.marvelheroguide.view.comic.ComicNavigationParams
 import com.diegocunha.marvelheroguide.view.comic.ComicsAdapter
 import org.koin.android.ext.android.inject
 
@@ -55,6 +58,10 @@ class CharacterDetailFragment : Fragment() {
         ViewCompat.setTransitionName(binding.characterImage, "image_$characterId")
 
         val adapter = ComicsAdapter()
+        adapter.comicDetail.observe(this, Observer {
+            openComicDetails(it)
+        })
+
         binding.comicsRecyclerView.adapter = adapter
 
         viewModel.comics.observe(this, Observer {
@@ -64,8 +71,20 @@ class CharacterDetailFragment : Fragment() {
             }
         })
 
-
-
         return binding.root
+    }
+
+    private fun openComicDetails(parameters: ComicNavigationParams) {
+        val id = parameters.comicId
+        val title = parameters.comicTitle
+
+        val action = CharacterDetailFragmentDirections.actionCharacterDetailFragmentToComicDetailFragment(id, title)
+        val extras = FragmentNavigator.Extras.Builder().apply {
+            parameters.sharedViews.forEach {
+                addSharedElement(it, ViewCompat.getTransitionName(it) ?: "")
+            }
+        }.build()
+
+        findNavController().navigate(action, extras)
     }
 }

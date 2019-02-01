@@ -42,10 +42,7 @@ class HomeViewModel(private val repository: MarvelRepository) : ViewModel() {
     }
 
 
-    private var requestHeroes: Disposable? = null
-
     override fun onCleared() {
         super.onCleared()
-        requestHeroes?.dispose()
     }
 }

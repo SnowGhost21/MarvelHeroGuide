@@ -38,6 +38,11 @@ class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
         return api.getComicsByHeroId(id, parameters)
     }
 
+    override fun getComicById(id: Int): Single<ResponseComic> {
+        val parameters = createDefaultParameters()
+        return api.getComicById(id, parameters)
+    }
+
     private fun createDefaultParameters(): LinkedHashMap<String, String> {
         val defaultParameters = LinkedHashMap<String, String>()
         val timeStamp = Date().time.toString()

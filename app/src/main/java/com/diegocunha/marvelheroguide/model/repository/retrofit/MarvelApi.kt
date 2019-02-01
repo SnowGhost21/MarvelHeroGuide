@@ -18,4 +18,7 @@ interface MarvelApi {
 
     @GET("characters/{id}/comics")
     fun getComicsByHeroId(@Path("id") id: Int, @QueryMap parameters: Map<String, String>): Single<ResponseComic>
+
+    @GET("comics/{id}")
+    fun getComicById(@Path("id") id: Int, @QueryMap parameters: Map<String, String>): Single<ResponseComic>
 }

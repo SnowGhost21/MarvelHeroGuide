@@ -1,6 +1,5 @@
 package com.diegocunha.marvelheroguide.model.repository.retrofit
 
-import com.diegocunha.marvelheroguide.model.fixture.createFixtureDefaultParameters
 import com.diegocunha.marvelheroguide.model.fixture.createResponse
 import com.diegocunha.marvelheroguide.model.fixture.createResponseComic
 import com.nhaarman.mockito_kotlin.any
@@ -23,6 +22,7 @@ class MarvelRetrofitRepositoryTest {
         whenever(api.getHeroes(any())).thenReturn(Single.just(createResponse))
         whenever(api.getHeroById(any(), any())).thenReturn(Single.just(createResponse))
         whenever(api.getComicsByHeroId(any(), any())).thenReturn(Single.just(createResponseComic))
+        whenever(api.getComicById(any(), any())).thenReturn(Single.just(createResponseComic))
     }
 
     @Test
@@ -44,6 +44,13 @@ class MarvelRetrofitRepositoryTest {
         val repository = MarvelRetrofitRepository(api)
         repository.getComicsByHeroId(1234)
         verify(api).getComicsByHeroId(any(), any())
+    }
+
+    @Test
+    fun shouldGetComicByIdFromApi() {
+        val repository = MarvelRetrofitRepository(api)
+        repository.getComicById(1234)
+        verify(api).getComicById(any(), any())
     }
 
 }

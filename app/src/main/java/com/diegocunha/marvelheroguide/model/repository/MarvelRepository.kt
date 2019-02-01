@@ -11,4 +11,6 @@ interface MarvelRepository {
     fun getHeroById(id: Int): Single<Response>
 
     fun getComicsByHeroId(id: Int): Single<ResponseComic>
+
+    fun getComicById(id: Int): Single<ResponseComic>
 }
