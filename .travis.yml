@@ -34,6 +34,3 @@ before_install:
 
 script:
   - ./gradlew test build --info
-
-after_success:
-  - codecov
