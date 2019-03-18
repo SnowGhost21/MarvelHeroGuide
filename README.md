@@ -18,4 +18,4 @@ O projeto foi dividio em uma camada de repositório em que todos os provedores d
 Neste projeto foi somente criado testes unitários da camada de repositório assim como a camada de ViewModel dos fragmentos, sendo os de adapters de RecyclerViews não entrando no mérito de testes e todos os testes foram escritos seguindo a teoria do [TDD](https://pt.wikipedia.org/wiki/Test_Driven_Development).
 
 ### Bibliotecas externas
-Das bibliotecas externas utilizadas no aplicativo, destaca-se o [Navigation](https://developer.android.com/topic/libraries/architecture/navigation) do Architecture Components, que visa facilitar as mudanças de tela do aplicativo de acordo com a necessidade. 
+Das bibliotecas externas utilizadas no aplicativo, destaca-se o [Navigation](https://developer.android.com/topic/libraries/architecture/navigation) do Architecture Components, que visa facilitar as mudanças de tela do aplicativo de acordo com a necessidade e o [](https://insert-˜.io/) para injeção de dependência pois é menos verbosa que o Dagger 2 e 100% escrita em Kotlin.

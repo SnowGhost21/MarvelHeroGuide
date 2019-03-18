@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.diegocunha.marvelheroguide.R
 import com.diegocunha.marvelheroguide.databinding.FragmentCharacterDetailBinding
 import com.diegocunha.marvelheroguide.view.MainActivity
+import com.diegocunha.marvelheroguide.view.comic.ComicDetailFragmentArgs
 import com.diegocunha.marvelheroguide.view.comic.ComicNavigationParams
 import com.diegocunha.marvelheroguide.view.comic.ComicsAdapter
 import org.koin.android.ext.android.inject
@@ -27,6 +29,8 @@ class CharacterDetailFragment : Fragment() {
                 .get(CharacterDetailViewModel::class.java)
     }
 
+    private val args: CharacterDetailFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,8 +40,8 @@ class CharacterDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentCharacterDetailBinding.inflate(inflater, container, false)
-        val characterId = CharacterDetailFragmentArgs.fromBundle(arguments).characterId
-        val characterName = CharacterDetailFragmentArgs.fromBundle(arguments).characterName
+        val characterId = args.characterId
+        val characterName = args.characterName
 
 
         (activity as MainActivity).supportActionBar?.apply {
@@ -47,7 +51,7 @@ class CharacterDetailFragment : Fragment() {
         }
         factory.setCharacterId(characterId)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         viewModel.description.observe(this, Observer {

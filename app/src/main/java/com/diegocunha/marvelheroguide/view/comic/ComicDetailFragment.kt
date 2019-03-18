@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.diegocunha.marvelheroguide.R
 import com.diegocunha.marvelheroguide.databinding.FragmentComicDetailBinding
@@ -24,6 +25,8 @@ class ComicDetailFragment : Fragment() {
                 .get(ComicDetailViewModel::class.java)
     }
 
+    private val args: ComicDetailFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,8 +36,8 @@ class ComicDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentComicDetailBinding.inflate(inflater, container, false)
-        val comicId = ComicDetailFragmentArgs.fromBundle(arguments).comicId
-        val title = ComicDetailFragmentArgs.fromBundle(arguments).comicTitle
+        val comicId = args.comicId
+        val title = args.comicTitle
         factory.setComicId(comicId)
 
         binding.setLifecycleOwner(this)
