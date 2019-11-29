@@ -1,50 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.diegocunha.marvelheroguide.view.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_characterDetailFragment"
             app:destination="@id/characterDetailFragment" />
     </fragment>
     <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.diegocunha.marvelheroguide.view.start.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/characterDetailFragment"
         android:name="com.diegocunha.marvelheroguide.view.character.CharacterDetailFragment"
-        android:label="CharacterDetailFragment" >
+        android:label="CharacterDetailFragment">
         <argument
             android:name="characterId"
             app:argType="integer" />
         <argument
             android:name="characterName"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_characterDetailFragment_to_comicDetailFragment"
-            app:destination="@id/comicDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.diegocunha.marvelheroguide.view.start.SplashFragment"
-        android:label="SplashFragment" >
-        <action
-            android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@+id/splashFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/comicDetailFragment"
-        android:name="com.diegocunha.marvelheroguide.view.comic.ComicDetailFragment"
-        android:label="ComicDetailFragment" >
-        <argument
-            android:name="comicId"
-            app:argType="integer" />
-        <argument
-            android:name="comicTitle"
             app:argType="string" />
     </fragment>
 </navigation>

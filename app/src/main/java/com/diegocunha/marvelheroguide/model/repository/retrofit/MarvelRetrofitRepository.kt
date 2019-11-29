@@ -6,7 +6,6 @@ import com.diegocunha.marvelheroguide.model.data.Response
 import com.diegocunha.marvelheroguide.model.data.ResponseComic
 import com.diegocunha.marvelheroguide.model.data.ResponseCreator
 import com.diegocunha.marvelheroguide.model.repository.MarvelRepository
-import io.reactivex.Single
 import java.util.*
 
 class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
@@ -18,7 +17,7 @@ class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
     }
 
 
-    override fun getHeroes(limit: Int, offset: Int): Single<Response> {
+    override suspend fun getHeroes(limit: Int, offset: Int): retrofit2.Response<Response> {
         val parameters = createDefaultParameters()
         parameters["limit"] = limit.toString()
         parameters["offset"] = offset.toString()
@@ -27,22 +26,22 @@ class MarvelRetrofitRepository(private val api: MarvelApi) : MarvelRepository {
         return api.getHeroes(parameters)
     }
 
-    override fun getHeroById(id: Int): Single<Response> {
+    override suspend fun getHeroById(id: Int): retrofit2.Response<Response> {
         val parameters = createDefaultParameters()
         return api.getHeroById(id, parameters)
     }
 
-    override fun getComicsByHeroId(id: Int): Single<ResponseComic> {
+    override suspend fun getComicsByHeroId(id: Int): retrofit2.Response<ResponseComic> {
         val parameters = createDefaultParameters()
         return api.getComicsByHeroId(id, parameters)
     }
 
-    override fun getComicById(id: Int): Single<ResponseComic> {
+    override suspend fun getComicById(id: Int): retrofit2.Response<ResponseComic> {
         val parameters = createDefaultParameters()
         return api.getComicById(id, parameters)
     }
 
-    override fun getCreatorsByComicId(id: Int): Single<ResponseCreator> {
+    override suspend fun getCreatorsByComicId(id: Int): retrofit2.Response<ResponseCreator> {
         val parameters = createDefaultParameters()
         return api.getCreatorsByComicId(id, parameters)
     }
