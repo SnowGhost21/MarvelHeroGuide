@@ -3,17 +3,16 @@ package com.diegocunha.marvelheroguide.model.repository
 import com.diegocunha.marvelheroguide.model.data.Response
 import com.diegocunha.marvelheroguide.model.data.ResponseComic
 import com.diegocunha.marvelheroguide.model.data.ResponseCreator
-import io.reactivex.Single
 
 interface MarvelRepository {
 
-    fun getHeroes(limit: Int, offset: Int): Single<Response>
+    suspend fun getHeroes(limit: Int, offset: Int): retrofit2.Response<Response>
 
-    fun getHeroById(id: Int): Single<Response>
+    suspend fun getHeroById(id: Int): retrofit2.Response<Response>
 
-    fun getComicsByHeroId(id: Int): Single<ResponseComic>
+    suspend fun getComicsByHeroId(id: Int): retrofit2.Response<ResponseComic>
 
-    fun getComicById(id: Int): Single<ResponseComic>
+    suspend fun getComicById(id: Int): retrofit2.Response<ResponseComic>
 
-    fun getCreatorsByComicId(id: Int): Single<ResponseCreator>
+    suspend fun getCreatorsByComicId(id: Int): retrofit2.Response<ResponseCreator>
 }

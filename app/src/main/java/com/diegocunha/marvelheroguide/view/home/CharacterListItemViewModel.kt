@@ -9,7 +9,7 @@ class CharacterListItemViewModel(private val character: Character,
 
     val name = character.name
 
-    val description = if (!character.description.isNullOrEmpty()) character.description else context.getString(R.string.description_not_available)
+    val description: String = if (!character.description.isNullOrEmpty()) character.description else context.getString(R.string.description_not_available)
 
     val imageUrl = character.thumbnail?.path + "." + character.thumbnail?.extension
 }

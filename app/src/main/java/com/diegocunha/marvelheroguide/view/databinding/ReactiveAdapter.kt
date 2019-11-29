@@ -3,7 +3,6 @@ package com.diegocunha.marvelheroguide.view.databinding
 import android.content.Context
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class ReactiveAdapter<T, R : ViewDataBinding> : RecyclerView.Adapter<ReactiveAdapter<T, R>.ViewHolder>() {
@@ -11,6 +10,11 @@ abstract class ReactiveAdapter<T, R : ViewDataBinding> : RecyclerView.Adapter<Re
     private var items: ArrayList<T> = ArrayList<T>()
 
     fun setItems(newItems: List<T>) {
+        items.addAll(newItems)
+        notifyDataSetChanged()
+    }
+
+    fun setItems(newItems: ArrayList<T>) {
         items.addAll(newItems)
         notifyDataSetChanged()
     }

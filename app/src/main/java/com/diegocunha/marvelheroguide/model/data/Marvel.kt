@@ -2,6 +2,7 @@ package com.diegocunha.marvelheroguide.model.data
 
 import com.google.gson.annotations.SerializedName
 import java.util.*
+import kotlin.collections.ArrayList
 
 data class Response(
         val data: Data
@@ -42,7 +43,7 @@ data class Url(val type: String?, val url: String?)
 
 data class Comic(
         val available: Int?, val returned: Int?, val collectionURI: String?,
-        var items: List<ComicSummary>?
+        var items: ArrayList<ComicSummary>?
 )
 
 data class ComicSummary(val id: Int,

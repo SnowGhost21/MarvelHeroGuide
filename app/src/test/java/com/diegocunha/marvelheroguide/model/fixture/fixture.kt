@@ -31,7 +31,7 @@ val createDataCreator = DataCreator(createListOfCreators)
 
 val createResponseCreator = ResponseCreator(createDataCreator)
 
-val createListComicSummary = listOf(createComicSummary)
+val createListComicSummary = arrayListOf(createComicSummary)
 
 val createComics = Comic(0, 0, "uri", createListComicSummary)
 
@@ -75,4 +75,3 @@ val createResponse = Response(createData)
 val createComicData = DataComic(createListComicSummary)
 
 val createResponseComic = ResponseComic(createComicData)
-
